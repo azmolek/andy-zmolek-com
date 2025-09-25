@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found • andy.zmolek.com</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root { --fg:#eaeaea; --bg:#0b0b0b; --muted:#9aa0a6; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+      background: radial-gradient(1200px 800px at 15% 20%, #111 0, #0b0b0b 50%, #070707 100%);
+      color: var(--fg);
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+    .card {
+      max-width: 46rem;
+      width: 100%;
+      border: 1px solid #1f1f1f;
+      border-radius: 1.25rem;
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 .5rem; letter-spacing: .3px; }
+    p { color: var(--muted); margin: .25rem 0 .5rem; line-height: 1.6; }
+    code { background:#111; padding:.15rem .35rem; border-radius:.4rem; }
+    .row { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem; }
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.7rem 1rem; border-radius:.75rem; text-decoration:none; color:#eaeaea;
+      border:1px solid #2a2a2a; background:#141414;
+      transition: transform .04s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover { background:#1a1a1a; border-color:#3a3a3a; transform: translateY(-1px); }
+    .muted { font-size:.9rem; color: var(--muted); margin-top: .75rem; }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">404 — Page not found</h1>
+    <p>Sorry, that URL doesn’t exist on <strong>andy.zmolek.com</strong>.</p>
+    <p class="muted">Tried <code><span id="path"></span></code> at <code><span id="host"></span></code>.</p>
+
+    <div class="row">
+      <a class="btn" href="/" aria-label="Go to homepage">← Home</a>
+      <a class="btn" href="/hello" aria-label="Try the /hello function">/hello</a>
+    </div>
+
+    <p class="muted">You’ll be taken back to the homepage in <span id="secs">5</span>s.</p>
+  </main>
+
+  <script>
+    const secs = document.getElementById('secs');
+    const path = document.getElementById('path');
+    const host = document.getElementById('host');
+    path.textContent = location.pathname + location.search;
+    host.textContent = location.host;
+
+    let n = 5;
+    const t = setInterval(() => {
+      n -= 1;
+      secs.textContent = n;
+      if (n <= 0) { clearInterval(t); location.href = '/'; }
+    }, 1000);
+  </script>
+</body>
+</html>
